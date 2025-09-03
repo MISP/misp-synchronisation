@@ -31,3 +31,58 @@ Before installing and using this project, make sure your host system meets the f
 
 ---
 
+## 📝 Step 1: Edit the topology configuration
+
+Before launching the instances, you must edit the `topology.conf` file to define how your MISP instances will be connected to each other.
+
+Each line defines the connections for a node in the format:
+
+```
+node=neighbor1 neighbor2 ...
+```
+
+For example, the following configuration:
+
+```
+1=2 3
+2=1
+3=
+4=3
+```
+can be represented by this diagram
+```mermaid
+flowchart LR
+    MISP_1 <--> MISP_2
+    MISP_1 --> MISP_3
+    MISP_4 --> MISP_3
+```
+
+You can modify this file according to your desired network topology.
+
+---
+
+## ▶️ Step 2: Launch the installation script
+
+Once your topology is defined, run the installation script to deploy the instances:
+
+```bash
+./Install.sh
+```
+
+Make sure the script has execution rights.
+
+```bash
+chmod +x Install.sh
+```
+
+During execution, the script will ask whether you want the last two instances to be **internal** (answer `yes` or `no`).
+
+* Choosing **yes** enables sharing of local objects between these internal instances.
+
+---
+
+
+
+## 🎉 Step 3: Enjoy!
+
+Your MISP instances are now being deployed. The process is straightforward, but depending on the number of instances and the performance of your machine, it may take several minutes to complete.
