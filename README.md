@@ -86,3 +86,29 @@ During execution, the script will ask whether you want the last two instances to
 ## 🎉 Step 3: Enjoy!
 
 Your MISP instances are now being deployed. The process is straightforward, but depending on the number of instances and the performance of your machine, it may take several minutes to complete.
+
+
+---
+
+## 🧪 Run Python tests
+
+To verify that the synchronisation between instances is working correctly, you can run the included Python tests:
+
+```bash
+# Create a virtual environment
+python3 -m venv env
+
+# Activate the virtual environment (Linux/MacOS)
+source env/bin/activate
+
+# Install dependencies
+pip3 install pymisp
+
+# Run the test suite
+./run_tests.sh
+```
+
+These tests will automatically check connectivity and data sharing between the deployed MISP instances.
+
+---
+
