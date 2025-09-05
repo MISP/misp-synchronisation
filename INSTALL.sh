@@ -33,15 +33,16 @@ for key in $(printf "%s\n" "${!CONNECTION_SCHEMA[@]}" | sort -n); do
 done
 
 
-# Ask if the last two instances should be internal
-echo -n "[?] Do you want the last two instances to be internal? (y/N): "
-read -r internal_choice
-if [[ "$internal_choice" =~ ^[yY]$ ]]; then
-  INTERNAL_LAST_TWO=true
-else
-  INTERNAL_LAST_TWO=false
-fi
+# Verify internal status for the last two instances
+INTERNAL_LAST_TWO=true
+for arg in "$@"; do
+    if [ "$arg" == "-no-internal" ]; then
+        INTERNAL_LAST_TWO=false
+        break
+    fi
+done
 
+echo "Internal status for the last two instances: $INTERNAL_LAST_TWO"
 
 MISP_DOCKER_URL="https://github.com/MISP/misp-docker.git"
 MISP_DOCKER_DIR="misp-docker"
