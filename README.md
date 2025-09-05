@@ -63,21 +63,20 @@ You can modify this file according to your desired network topology.
 
 ## ▶️ Step 2: Launch the installation script
 
-Once your topology is defined, run the installation script to deploy the instances:
+Once your topology is defined, make sure the installation script has execution rights:
 
 ```bash
-./Install.sh
+chmod +x INSTALL.sh
 ```
-
-Make sure the script has execution rights.
+And then run it to deploy the instances:
 
 ```bash
-chmod +x Install.sh
+./INSTALL.sh
 ```
 
-During execution, the script will ask whether you want the last two instances to be **internal** (answer `yes` or `no`).
+By default, the last two instances in your topology are considered internal. You can pass the **--no-internal** flag in the execution command if you do not want this behavior.
 
-* Choosing **yes** enables sharing of local objects between these internal instances.
+*Note: All tests from **test\_sync\_with\_internal\_server.py** will fail if this flag is used.*
 
 ---
 
