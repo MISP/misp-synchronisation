@@ -10,11 +10,11 @@ class TestLockedStatus(unittest.TestCase):
         """
         # Use the first MISP instance as the source for the event
         source_instance = misps_org_admin[0]
-        
+
         # Create a new event on the source instance
         event = create_event('\n Event for locked status on push')
         event.distribution = 2  # Set distribution to 'Connected Community'
-        
+
         event = source_instance.add_event(event, pythonify=True)
         check_response(event)
         self.assertIsNotNone(event.id)
@@ -81,7 +81,7 @@ class TestLockedStatus(unittest.TestCase):
         # Publish the event immediately to make it available for pulling
         publish_immediately(source_instance, event, with_email=False)
         time.sleep(2)  # Allow time for synchronization to complete
-        
+
         # Publish the event again to ensure propagation
         publish_immediately(source_instance, event, with_email=False)
         time.sleep(2)  # Allow time for synchronization to complete
@@ -107,7 +107,7 @@ class TestLockedStatus(unittest.TestCase):
             len(updated_event[0]['Event']['Attribute']), 2,
             f"Event on MISP_{target_index} was modified despite being locked"
         )
-        
+
         # Cleanup: remove all test events and blocklists from all instances
         for instance in misps_site_admin:
             purge_events_and_blocklists(instance)

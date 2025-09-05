@@ -20,7 +20,7 @@ class TestDistributionLevel(unittest.TestCase):
         """
         # Use the first MISP instance as source
         source_instance = misps_org_admin[0]
-        
+
         # Create an event with distribution level 0 (Your organisation only)
         event = create_event('Event for distribution level 1')
         event.distribution = 0
@@ -233,7 +233,7 @@ class TestDistributionLevel(unittest.TestCase):
         # Create an event with distribution level 2 (Connected communities)
         event = create_event('Event for downgrade distribution level')
         event.distribution = 2
-        
+
         event = source_instance.add_event(event, pythonify=True)
         check_response(event)
         self.assertIsNotNone(event.id)
@@ -314,7 +314,7 @@ class TestDistributionLevel(unittest.TestCase):
         event_name = f"Event {source_index} for pull on {target_index} on downgrade distribution level"
         event = create_event(event_name)
         event.distribution = 1
-        
+
         event = source_instance.add_event(event, pythonify=True)
         check_response(event)
         self.assertIsNotNone(event.id)
@@ -579,7 +579,7 @@ class TestDistributionLevel(unittest.TestCase):
             cluster.authors = ["CIRCL"]
             cluster.distribution = 2
             cluster.description = "Cluster with distribution 2"
-            
+
             source_instance.add_galaxy_cluster(new_galaxy, cluster, pythonify=True)
             source_instance.publish_galaxy_cluster(cluster.uuid)
 
@@ -1004,7 +1004,7 @@ class TestDistributionLevel(unittest.TestCase):
         # Verify that the event is present on the target
         search_results = target_instance.search(uuid=uuid)
         self.assertGreater(len(search_results), 0, f"Event not found on MISP_{target_index} after pull")
-        
+
         analyst_data_dist = [
             element.note
             for element in notes

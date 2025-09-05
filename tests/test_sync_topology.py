@@ -103,7 +103,7 @@ class TestSyncForAllServers(unittest.TestCase):
                 event_name = f"Event {source_index} for pull on {target_index}"
                 event = create_event(event_name)
                 event.distribution = 2
-                
+
                 event = source_instance.add_event(event, pythonify=True)
                 check_response(event)
                 self.assertIsNotNone(event.id)

@@ -13,7 +13,7 @@ class TestModifyAttribute(unittest.TestCase):
         """
         # Use the first MISP instance as the source
         source_instance = misps_org_admin[0]
-        
+
         # Create a new event on the source instance
         event = create_event('Event for updated attribute on push')
         event.distribution = 2
@@ -24,7 +24,7 @@ class TestModifyAttribute(unittest.TestCase):
         check_response(event)
         self.assertIsNotNone(event.id)
         uuid = event.uuid
-        
+
         # Publish the event immediately to propagate changes
         publish_immediately(source_instance, event, with_email=False)
         time.sleep(2)  # Wait for synchronization to complete
@@ -97,7 +97,7 @@ class TestModifyAttribute(unittest.TestCase):
         event = create_event(event_name)
         event.distribution = 2
         attribute = event.add_attribute('text', 'initial_value')
-        
+
         # Add the event to the source instance
         event = source_instance.add_event(event, pythonify=True)
         check_response(event)
@@ -172,18 +172,18 @@ class TestModifyAttribute(unittest.TestCase):
         """
         # Use the first MISP instance as the source
         source_instance = misps_org_admin[0]
-        
+
         # Create a new event on the source instance
         event = create_event('Event for soft delete attribute on push')
         event.distribution = 2
         attribute = event.add_attribute('text', 'Gotta be deleted')
-        
+
         # Add the event to the source instance
         event = source_instance.add_event(event, pythonify=True)
         check_response(event)
         self.assertIsNotNone(event.id)
         uuid = event.uuid
-        
+
         # Publish the event immediately
         publish_immediately(source_instance, event, with_email=False)
         time.sleep(2)  # Wait for synchronization to complete
@@ -250,7 +250,7 @@ class TestModifyAttribute(unittest.TestCase):
         event = create_event(event_name)
         event.distribution = 2
         attribute = event.add_attribute('text', 'Gotta be deleted')
-        
+
         # Add the event to the source instance
         event = source_instance.add_event(event, pythonify=True)
         check_response(event)
@@ -325,7 +325,7 @@ class TestModifyAttribute(unittest.TestCase):
         """
         # Use the first MISP instance as the source
         source_instance = misps_org_admin[0]
-        
+
         # Create a new event on the source instance
         event = create_event('Event for updated proposal attribute on push')
         event.distribution = 2
@@ -363,7 +363,7 @@ class TestModifyAttribute(unittest.TestCase):
         servers_id = get_servers_id(servers)
         if not servers_id:
             raise Exception("No server configuration found for the source instance")
-        
+
         # Perform the push operation on all linked servers (proposals are not shared with a single publication)
         for server_id in servers_id:
             push_response = misps_site_admin[0].server_push(server=server_id, event=event.id)
@@ -524,7 +524,7 @@ class TestModifyAttribute(unittest.TestCase):
                         found_second_proposal = True
                 self.assertTrue(found_first_proposal, f"Accepted proposal not found on MISP_{target_index}")
                 self.assertFalse(found_second_proposal, f"Discarded proposal found on MISP_{target_index}")
-                
+
         # Cleanup: delete all test events and blocklists on all instances
         for instance in misps_site_admin:
             purge_events_and_blocklists(instance)
@@ -566,13 +566,13 @@ class TestModifyAttribute(unittest.TestCase):
         servers_id = get_servers_id(servers)
         if not servers_id:
             raise Exception("No server configuration found for the source instance")
-        
+
         # Perform the push operation on all linked servers (proposals are not shared with a single publication)
         for server_id in servers_id:
             push_response = misps_site_admin[0].server_push(server=server_id)
             time.sleep(2)  # Wait for the push operation to complete
             check_response(push_response)
-            
+
         # Verify that the event is present on each target instance with the proposal attribute
         linked_server_numbers = extract_server_numbers(servers)
         for target_index in linked_server_numbers:
@@ -616,7 +616,7 @@ class TestModifyAttribute(unittest.TestCase):
         check_response(event)
         self.assertIsNotNone(event.id)
         uuid = event.uuid
-        
+
         # Add a new attribute to the event
         new_attribute = MISPAttribute()
         new_attribute.value = 'John'

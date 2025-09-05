@@ -215,11 +215,11 @@ class TestEventEnrichment(unittest.TestCase):
         """
         # Use the first MISP instance as source
         source_instance = misps_org_admin[0]
-        
+
         # Create an event
         event = create_event('Event with a global tag')
         event.distribution = 2
-        
+
         event = source_instance.add_event(event, pythonify=True)
         check_response(event)
         self.assertIsNotNone(event.id)
@@ -279,7 +279,7 @@ class TestEventEnrichment(unittest.TestCase):
         event_name = f"Event {source_index} with a global tag for pull on {target_index}"
         event = create_event(event_name)
         event.distribution = 2
-        
+
         event = source_instance.add_event(event, pythonify=True)
         check_response(event)
         self.assertIsNotNone(event.id)
@@ -293,7 +293,7 @@ class TestEventEnrichment(unittest.TestCase):
 
         # Tag the event with the global tag
         source_instance.tag(event, new_global_tag.name)
-        
+
         # Publish the event immediately
         publish_immediately(source_instance, event, with_email=False)
         time.sleep(2)  # Allow time for sync propagation
@@ -336,7 +336,7 @@ class TestEventEnrichment(unittest.TestCase):
         # Create an event
         event = create_event('Event with a local tag')
         event.distribution = 2
-        
+
         event = source_instance.add_event(event, pythonify=True)
         check_response(event)
         self.assertIsNotNone(event.id)
@@ -354,7 +354,7 @@ class TestEventEnrichment(unittest.TestCase):
         tag.name = 'This is not a local tag'
         new_global_tag = source_instance.add_tag(tag, pythonify=True)
         check_response(new_global_tag)
-        
+
         # Tag the event with both tags (local and global)
         source_instance.tag(event, new_local_tag.name, local=True) # Specify local flag
         source_instance.tag(event, new_global_tag.name)
@@ -411,7 +411,7 @@ class TestEventEnrichment(unittest.TestCase):
         event_name = f"Event {source_index} with a local tag for pull on {target_index}"
         event = create_event(event_name)
         event.distribution = 2
-        
+
         event = source_instance.add_event(event, pythonify=True)
         check_response(event)
         self.assertIsNotNone(event.id)
@@ -433,7 +433,7 @@ class TestEventEnrichment(unittest.TestCase):
         # Tag the event with both tags (local and global)
         source_instance.tag(event, new_local_tag.name, local=True)  # Specify local flag
         source_instance.tag(event, new_global_tag.name)
-        
+
         # Publish the event immediately
         publish_immediately(source_instance, event, with_email=False)
         time.sleep(2)  # Allow time for sync propagation
