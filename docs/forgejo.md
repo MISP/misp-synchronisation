@@ -128,10 +128,10 @@ On your local Forgejo server, create a mirror clone of these GitHub repositories
 
 - [shivammathur/setup-php](https://github.com/shivammathur/setup-php.git)  
 - [viper-framework/viper-test-files](https://github.com/viper-framework/viper-test-files.git)  
-
+- [MISP/misp-synchronisation](https://github.com/MISP/misp-synchronisation.git) 
 ---
 
-## 5. Add a GitHub Token (Optional)
+## 5. Add a GitHub Token (Recommended)
 
 To speed up cloning dependencies inside the pipeline, you can add your GitHub token here:  
 
