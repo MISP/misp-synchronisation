@@ -1,4 +1,4 @@
-# MISP Synchronisation
+# MISP Synchronisation Testing and Validation
 
 ![MISP Synchronisation](https://github.com/MISP/misp-synchronisation/blob/main/docs/logo.png)
 
